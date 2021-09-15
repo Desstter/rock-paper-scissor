@@ -8,7 +8,7 @@ const SelectionZone = () => {
         <Container>
             <Row>
                 <Col>
-                    <Image src='RockPick' fluid className='Selections' onClick={RockPick} />
+                    <Image src='Rock.png' fluid className='Selections' onClick={RockPick} />
                 </Col>
                 <Col>
                     <Image src='Paper.png' fluid className='Selections' onClick={PaperPick} />

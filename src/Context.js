@@ -5,7 +5,7 @@ const SocketContext = createContext();
 const ContextProvider = ({ children }) => {
     const [userpick, setUserPick] = useState('Rock.png');
     const [cpupick, setCpuPick] = useState('Rock.png');
-    const [result, setResult] = useState('VS.png');
+    const [result, setResult] = useState('Vs.png');
     const [userscore, setUserScore] = useState(0);
     const [cpuscore, setCpuScore] = useState(0);
     const [round, setRound] = useState(0);

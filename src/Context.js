@@ -2,61 +2,70 @@ import React, { createContext, useState, useMemo } from 'react';
 
 const SocketContext = createContext();
 
+const IMAGE_NAMES = {
+    ROCK: 'Rock.png',
+    PAPER: 'Paper.png',
+    SCISSOR: 'Scissor.png',
+    VS: 'Vs.png',
+    WIN: 'Win.png',
+    LOSS: 'Loss.png',
+};
+
 const ContextProvider = ({ children }) => {
-    const [userpick, setUserPick] = useState('Rock.png');
-    const [cpupick, setCpuPick] = useState('Rock.png');
-    const [result, setResult] = useState('Vs.png');
+    const [userpick, setUserPick] = useState(IMAGE_NAMES.ROCK);
+    const [cpupick, setCpuPick] = useState(IMAGE_NAMES.ROCK);
+    const [result, setResult] = useState(IMAGE_NAMES.VS);
     const [userscore, setUserScore] = useState(0);
     const [cpuscore, setCpuScore] = useState(0);
     const [round, setRound] = useState(0);
 
-    const rondamas = () => {
+    const handleRound = () => {
         setTimeout(() => {
             setRound(round + 1);
         }, 200);
     }
 
-    const RockPick = () => {
-        setUserPick('Rock.png')
+    const pick = (userpick) => {
+        setUserPick(userpick);
         CpuChoise();
-        rondamas();
-    }
-
-    const PaperPick = () => {
-        setUserPick('Paper.png')
-        CpuChoise();
-        rondamas();
-    }
-
-    const ScissorPick = () => {
-        setUserPick('Scissor.png')
-        CpuChoise();
-        rondamas();
-    }
+        handleRound();
+    };
 
     const CpuChoise = () => {
-        const Choises = ['Rock.png', 'Paper.png', 'Scissor.png'];
+        const Choises = [IMAGE_NAMES.ROCK, IMAGE_NAMES.PAPER, IMAGE_NAMES.SCISSOR];
         const number = Math.floor(Math.random() * Choises.length);
-        setCpuPick(Choises[number])
-    }
+        setCpuPick(Choises[number]);
+    };
 
     useMemo(() => {
         if (userpick === cpupick && round >= 1) {
             alert('TIE')
         }
-        else if ((userpick === "Rock.png" && cpupick === "Scissor.png") || (userpick === "Paper.png" && cpupick === "Rock.png") || (userpick === "Scissor.png" && cpupick === "Paper.png")) {
-            setResult('Win.png');
+        else if (
+            (userpick === IMAGE_NAMES.ROCK && cpupick === IMAGE_NAMES.SCISSOR) ||
+            (userpick === IMAGE_NAMES.PAPER && cpupick === IMAGE_NAMES.ROCK) ||
+            (userpick === IMAGE_NAMES.SCISSOR && cpupick === IMAGE_NAMES.PAPER)) {
+            setResult(IMAGE_NAMES.WIN);
             setTimeout(() => {
-                setResult('Vs.png')
+                setResult(IMAGE_NAMES.VS);
+
             }, 1500);
             setUserScore(userscore + 1)
         }
-        else if ((cpupick === "Rock.png" && userpick === "Scissor.png") || (cpupick === "Paper.png" && userpick === "Rock.png") || (cpupick === "Scissor.png" && userpick === "Paper.png")) {
-            setResult('Loser.png');
+        else if (
+            (cpupick === IMAGE_NAMES.ROCK && userpick === IMAGE_NAMES.SCISSOR) ||
+            (cpupick === IMAGE_NAMES.PAPER && userpick === IMAGE_NAMES.ROCK) ||
+            (cpupick === IMAGE_NAMES.SCISSOR && userpick === IMAGE_NAMES.PAPER)) {
+            setResult(IMAGE_NAMES.LOSS);
             setTimeout(() => {
-                setResult('Vs.png')
+                setResult(IMAGE_NAMES.VS);
             }, 1500);
             setCpuScore(cpuscore + 1)
+        }
+        else {
+            console.error(
+                `Unexpected userpick or cpupick value: userpick = ${userpick}, cpupick = ${cpupick}`
+            );
         }
     }, [round]);
 
@@ -67,14 +76,14 @@ const ContextProvider = ({ children }) => {
             result,
             userscore,
             cpuscore,
-            RockPick,
-            PaperPick,
-            ScissorPick
+            RockPick: () => pick(IMAGE_NAMES.ROCK),
+            PaperPick: () => pick(IMAGE_NAMES.PAPER),
+            ScissorPick: () => pick(IMAGE_NAMES.SCISSOR),
         }}
         >
             {children}
-        </SocketContext.Provider>
-    );  
+        </SocketContext.Provider >
+    );
 };
 
 export { ContextProvider, SocketContext };

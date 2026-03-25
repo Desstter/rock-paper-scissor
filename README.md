@@ -1,27 +1,26 @@
-# Getting Started with Create React App
+# Rock Paper Scissors
 
-Welcome to the Rock Paper Scissors game!
+Juego clásico de Piedra, Papel o Tijera contra la computadora, construido con React y JavaScript.
 
-In this game, you will play against the computer. The game follows the traditional rules of rock paper scissors:
+## Demo
 
-Rock beats scissors (rock crushes scissors)
-Scissors beat paper (scissors cut paper)
-Paper beats rock (paper covers rock)
-If you and the computer choose the same option, the game is a tie.
+Juega en vivo en [GitHub Pages](https://desstter.github.io/rock-paper-scissor/)
 
-To play the game, simply select one of the three options by clicking the corresponding button. The computer will make its selection, and the result of the game will be displayed. The score will be updated accordingly.
+## Cómo jugar
 
-Good luck and have fun!
+Haz clic en Piedra, Papel o Tijera para hacer tu elección. La computadora elige al azar y el resultado se muestra de inmediato. El marcador se actualiza automáticamente.
 
-## Available Scripts
+**Reglas:** Piedra vence Tijera · Tijera vence Papel · Papel vence Piedra
 
-In the project directory, you can run:
+## Stack
 
-### `npm start`
+React · JavaScript · CSS
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Setup
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```bash
+npm install
+npm start
+```
 
+Abre `http://localhost:3000` en tu navegador.
